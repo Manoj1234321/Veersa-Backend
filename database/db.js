@@ -10,8 +10,10 @@ var client = mongoose
     console.log(" Connected to the database");
   })
   .catch((err) => {
-    console.log(" @@@@@@@@@@@@@@@@@@@@@ error in conection", err);
+    console.log("error in conection", err);
     throw err;
   });
 
-module.exports = { client };
+module.exports = {
+  client
+};

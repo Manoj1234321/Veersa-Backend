@@ -12,10 +12,10 @@ const userAuthenticationMiddleware = async (req, res, next) => {
     req.dataFromMiddleware1 = responseData.data;
     next();
   } catch (err) {
-    throw err;
+    res.send(err)
   }
 };
 
 module.exports = {
   userAuthenticationMiddleware,
-};
+}
