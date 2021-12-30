@@ -5,13 +5,17 @@ const port = process.env.PORT || 1200;
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 require("./database/db");
 const route = require("./routes/route");
 app.use("/v1", route);
 app
   .get("/", (req, res) => {
-    res.send({ message: " Running good" });
+    res.send({
+      message: " Running good"
+    });
   })
   .listen(port, (err) => {
     if (err) {
