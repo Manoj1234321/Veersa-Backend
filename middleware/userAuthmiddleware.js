@@ -19,11 +19,11 @@ const userAuthenticationMiddleware = async (req, res, next) => {
     next();
   } catch (err) {
     if (err.response.status == 401) {
-      res.send({
+      res.status(401).send({
         message: " Invalid Access Token",
       });
     }
-    res.send(err);
+    // res.send(err);
   }
 };
 

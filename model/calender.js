@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const calenderSchema = new mongoose.Schema({
   userid: {
-    type: Number,
+    type: String,
     required: true,
   },
-  email: {
+  mail: {
     type: String,
     required: true,
   },
