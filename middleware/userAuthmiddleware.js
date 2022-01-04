@@ -16,7 +16,6 @@ const userAuthenticationMiddleware = async (req, res, next) => {
       },
     });
     req.dataFromMiddleware1 = responseData.data;
-    if (responseData.data.status) res.send("htfug");
     next();
   } catch (err) {
     if (err.response.status == 401) {
