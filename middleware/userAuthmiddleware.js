@@ -1,9 +1,8 @@
 require("dotenv").config();
 const axios = require("axios");
-const userAuthController = require("../controller/userauthcontroller");
 const userAuthenticationMiddleware = async (req, res, next) => {
   if (req.headers.authorization == undefined) {
-    return res.send({
+    return res.status(401).send({
       message: " No Token Found",
     });
   }
@@ -18,12 +17,9 @@ const userAuthenticationMiddleware = async (req, res, next) => {
     req.dataFromMiddleware1 = responseData.data;
     next();
   } catch (err) {
-    if (err.response.status == 401) {
-      res.status(401).send({
-        message: " Invalid Access Token",
-      });
-    }
-    // res.send(err);
+    res.status(err.response.status).send({
+      message: " Invalid Access Token",
+    });
   }
 };
 
