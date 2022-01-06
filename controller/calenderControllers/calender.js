@@ -8,7 +8,7 @@ const store = async (req, res) => {
             date: req.body.date,
         });
         if (calenderData) {
-            res.status(201).send(`Data already exists of this date and id`);
+            res.status(201).send({message:`Data already exists of this date and id`});
         } else {
             (req.body.userid = req.dataFromMiddleware1.id),
             calenderSchema.insertMany(req.body, (err, docs) => {

@@ -9,8 +9,12 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 require("./database/db");
-const route = require("./routes/route");
-app.use("/v1", route);
+const calenderRoute = require("./routes/calenderRoutes/calender");
+const meRoute = require("./routes/meRoutes/me");
+
+app.use("/v1", calenderRoute);
+app.use("/v1", meRoute);
+
 app
   .get("/", (req, res) => {
     res.send({
