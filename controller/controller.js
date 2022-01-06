@@ -1,12 +1,16 @@
 var UserSchema = require("../model/model");
 
 const postData = (req, res) => {
-  UserSchema.findOne({ token: req.body.token }, (err, item) => {
+  UserSchema.findOne({
+    token: req.body.token
+  }, (err, item) => {
     if (err) {
       throw err;
     }
     if (item) {
-      res.send({ message: " User already exists" });
+      res.send({
+        message: " User already exists"
+      });
     } else {
       var data = req.body;
       var user = new UserSchema(data);

@@ -1,4 +1,4 @@
-let calenderSchema = require("../model/calender");
+let calenderSchema = require("../model/calenderModels/calender");
 
 const store = async (req, res) => {
   try {
@@ -11,16 +11,16 @@ const store = async (req, res) => {
       res.status(201).send(`Data already exists of this date and id`);
     } else {
       (req.body.userid = req.dataFromMiddleware1.id),
-        calenderSchema.insertMany(req.body, (err, docs) => {
-          if (err) {
-            console.log(err);
-            res.send(err);
-          }
-          console.log(docs);
-          res.status(201).send({
-            success: true,
-          });
+      calenderSchema.insertMany(req.body, (err, docs) => {
+        if (err) {
+          console.log(err);
+          res.send(err);
+        }
+        console.log(docs);
+        res.status(201).send({
+          success: true,
         });
+      });
     }
   } catch (err) {
     res.status(201).send(err);

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("../model/model");
-const calenderSchema = require('../model/calender')
+const calenderSchema = require('../model/calenderModels/calender')
 var client = mongoose
   .connect("mongodb://127.0.0.1:27017/app", {
     //useCreateIndex : true,
