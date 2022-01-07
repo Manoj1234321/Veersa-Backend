@@ -12,6 +12,12 @@ const store = async (req, res) => {
         message: `Data already exists of this date and id`,
       });
     } else {
+      var isEmptyObj = !Object.keys(req.body).length;
+      if (isEmptyObj) {
+        return res.send({
+          message: " all the fields are required ",
+        });
+      }
       (req.body.userid = req.dataFromMiddleware1.id), (array = []);
       req.body.data.forEach((element) => {
         array.push(
