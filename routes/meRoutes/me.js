@@ -1,13 +1,23 @@
 const express = require("express");
 const app = express();
 const middlewares = require("../../middleware/userAuthmiddleware");
-//const controller = require("../controller/controller");
 const userAuth = require("../../controller/userAuthControllers/userAuth");
-//const calender = require("../controller/calender");
 
-//app.post('/postdata', controller.postData);
+
+/**
+ * @swagger
+ * /v1/me:
+ *  get:
+ *   summary: get Data of the user's
+ *   description: get Data of the user's
+ *   responses:
+ *    200:
+ *     description: success
+ *    500:
+ *     description: error
+ */
 app.get('/me', middlewares.userAuthenticationMiddleware, userAuth.userAuth);
-// app.post('/calender', middlewares.userAuthenticationMiddleware, calender.store);
-// app.get('/calender', middlewares.userAuthenticationMiddleware, calender.index);
+
+
 
 module.exports = app;

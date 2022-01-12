@@ -1,13 +1,80 @@
 const express = require("express");
 const app = express();
 const middlewares = require("../../middleware/userAuthmiddleware");
-// const controller = require("../controller/controller");
-// const userAuth = require("../controller/userauthcontroller");
 const calender = require("../../controller/calenderControllers/calender");
 
-// app.post('/postdata', controller.postData);
-// app.get('/me', middlewares.userAuthenticationMiddleware, userAuth.userAuth);
+
+/**
+ * @swagger
+ *  components:
+ *      schemas: 
+ *          Pet:
+ *              type: object
+ *              required:
+ *                - pet_type
+ *              properties:
+ *                pet_type:
+ *                  type: string
+ *              discriminator:
+ *                propertyName: pet_type  
+ *          Dog:
+ *            allOf:
+ *              - $ref: '#/components/schemas/Pet'
+ *              - type: object
+ *                properties:
+ *                 date:
+ *                   type: string 
+ *          Cat:
+ *            allOf:
+ *              - $ref: '#components/schemas/Pet'
+ *              - type: array
+ *                properties:
+ *                    taskid: 
+ *                      type: string
+ *                    startTime:
+ *                      type: string
+ *                    endTime:
+ *                      type: string
+ *                    summary:
+ *                      type: string      
+ */
+
+
+
+/**
+ * @swagger
+ * /v1/calender:
+ *  post:
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              oneOf:
+ *                - $ref: "#components/schemas/Cat"
+ *                - $ref: "#components/schemas/Dog"
+ *              discriminator:
+ *                propertyName: pet_type
+ *      responses:
+ *          200:
+ *              description: success
+ */
 app.post('/calender', middlewares.userAuthenticationMiddleware, calender.store);
+
+/**
+ * @swagger
+ * /v1/calender:
+ *  get:
+ *   parameters:
+ *     - in: query
+ *       name: date 
+ *   summary: get Data of the particular user by date
+ *   description: get Data of the user's by date
+ *   responses:
+ *    200:
+ *     description: success
+ *    500:
+ *     description: error
+ */
 app.get('/calender', middlewares.userAuthenticationMiddleware, calender.index);
 
 module.exports = app;

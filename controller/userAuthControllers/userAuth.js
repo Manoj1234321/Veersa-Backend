@@ -19,7 +19,7 @@ const {
     } catch (err) {
       if (err.response.status == 404) {
         req.dataFromMiddleware1["image"] = " ";
-        res.status(404).send(req.dataFromMiddleware1);
+        res.send(req.dataFromMiddleware1);
       }
     }
   };

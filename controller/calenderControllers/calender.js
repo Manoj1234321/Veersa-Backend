@@ -25,8 +25,9 @@ const store = async (req, res) => {
         );
         array.push(parseFloat(element.endTime.split(":").join(".")).toFixed(2));
       });
-      for (i = 0; i < array.length; i++) {
-        if (array[i] > array[i + 1]) {
+      numbers = array.map(Number);
+      for (i = 0; i < numbers.length; i++) {
+        if (numbers[i] > numbers[i + 1]) {
           return res.send({
             message: " Start time cannot be greater than end time",
           });
