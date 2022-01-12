@@ -3,11 +3,10 @@ const app = express();
 const middlewares = require("../../middleware/userAuthmiddleware");
 const calender = require("../../controller/calenderControllers/calender");
 
-
 /**
  * @swagger
  *  components:
- *      schemas: 
+ *      schemas:
  *          Pet:
  *              type: object
  *              required:
@@ -16,30 +15,33 @@ const calender = require("../../controller/calenderControllers/calender");
  *                pet_type:
  *                  type: string
  *              discriminator:
- *                propertyName: pet_type  
+ *                propertyName: pet_type
  *          Dog:
  *            allOf:
  *              - $ref: '#/components/schemas/Pet'
  *              - type: object
  *                properties:
  *                 date:
- *                   type: string 
+ *                   type: string
+ *                   example: 12-05-2021
  *          Cat:
  *            allOf:
  *              - $ref: '#components/schemas/Pet'
  *              - type: array
  *                properties:
- *                    taskid: 
+ *                    taskid:
  *                      type: string
+ *                    example: 4
  *                    startTime:
  *                      type: string
+ *                      example: 10:10
  *                    endTime:
  *                      type: string
+ *                      example: 11:00
  *                    summary:
- *                      type: string      
+ *                      type: string
+ *                      example: created api for get route
  */
-
-
 
 /**
  * @swagger
@@ -58,7 +60,7 @@ const calender = require("../../controller/calenderControllers/calender");
  *          200:
  *              description: success
  */
-app.post('/calender', middlewares.userAuthenticationMiddleware, calender.store);
+app.post("/calender", middlewares.userAuthenticationMiddleware, calender.store);
 
 /**
  * @swagger
@@ -66,7 +68,7 @@ app.post('/calender', middlewares.userAuthenticationMiddleware, calender.store);
  *  get:
  *   parameters:
  *     - in: query
- *       name: date 
+ *       name: date
  *   summary: get Data of the particular user by date
  *   description: get Data of the user's by date
  *   responses:
@@ -75,6 +77,6 @@ app.post('/calender', middlewares.userAuthenticationMiddleware, calender.store);
  *    500:
  *     description: error
  */
-app.get('/calender', middlewares.userAuthenticationMiddleware, calender.index);
+app.get("/calender", middlewares.userAuthenticationMiddleware, calender.index);
 
 module.exports = app;
