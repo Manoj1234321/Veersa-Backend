@@ -1,27 +1,17 @@
 const calenderModel = require("../../model/calenderModels/calender");
-const superAdmin = async (req, res) => {
+const usersNames = async (req, res) => {
   try {
     await calenderModel
-      .find({
-        isSuperAdmin: true,
-        date: req.query.date,
-      })
+      .find({ date: req.query.date }, { name: 1, userid: 1, _id: 0 })
       .exec((err, docs) => {
         if (err) {
           res.send(err);
         } else {
-          // if (docs.length === 0) {
-          //   return res.send({
-          //     data: [],
-          //   });
-          // }
-          // res.send(docs);
-          if (docs == null) {
+          if (docs.length === 0) {
             return res.send({
               data: [],
             });
           }
-
           res.send(docs);
         }
       });
@@ -30,5 +20,5 @@ const superAdmin = async (req, res) => {
   }
 };
 module.exports = {
-  superAdmin,
+  usersNames,
 };

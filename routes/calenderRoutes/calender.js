@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const middlewares = require("../../middleware/userAuthmiddleware");
 const calender = require("../../controller/calenderControllers/calender");
+const userNames = require("../../controller/calenderControllers/userNames");
+
 
 /**
  * @swagger
@@ -80,5 +82,6 @@ app.post("/calender", middlewares.userAuthenticationMiddleware, calender.store);
  *     description: error
  */
 app.get("/calender", middlewares.userAuthenticationMiddleware, calender.index);
+app.get("/allnames",middlewares.userAuthenticationMiddleware,userNames.usersNames)
 
 module.exports = app;
