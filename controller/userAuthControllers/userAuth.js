@@ -1,11 +1,12 @@
-const { default: axios } = require("axios");
+const {
+  default: axios
+} = require("axios");
 
 let userAuth = async (req, res) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
     var image = await axios.get(
-      "https://graph.microsoft.com/v1.0/me/photo/$value",
-      {
+      "https://graph.microsoft.com/v1.0/me/photo/$value", {
         responseType: "arraybuffer",
         headers: {
           Authorization: "Bearer " + token,
@@ -14,7 +15,7 @@ let userAuth = async (req, res) => {
     );
     const buffer = Buffer.from(image.data, "binary").toString("base64");
     req.dataFromMiddleware1["image"] = buffer;
-    if (req.dataFromMiddleware1.jobTitle == "Software Engineer") {
+    if (req.dataFromMiddleware1.jobTitle === null) {
       req.dataFromMiddleware1["isAdmin"] = false;
       req.dataFromMiddleware1["isviewer"] = true;
       req.dataFromMiddleware1["isSuperAdmin"] = true;
