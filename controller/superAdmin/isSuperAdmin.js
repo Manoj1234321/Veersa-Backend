@@ -10,6 +10,11 @@ const superAdmin = async (req, res) => {
         if (err) {
           res.send(err);
         } else {
+          if (docs == null) {
+            return res.send({
+              data: [],
+            });
+          }
           res.send(docs);
         }
       });
