@@ -64,6 +64,8 @@ app.post("/calender", middlewares.userAuthenticationMiddleware, calender.store);
 
 /**
  * @swagger
+ * tags: 
+ *  name: Get User's data by Date
  * /v1/calender:
  *  get:
  *   parameters:

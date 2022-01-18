@@ -6,6 +6,9 @@ const userAuth = require("../../controller/userAuthControllers/userAuth");
 
 /**
  * @swagger
+ * tags:
+ *  name: User's Data
+ *  description: User's Data
  * /v1/me:
  *  get:
  *   summary: get Data of the user's

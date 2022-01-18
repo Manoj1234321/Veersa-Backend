@@ -3,6 +3,7 @@ let calenderSchema = require("../../model/calenderModels/calender");
 const store = async (req, res) => {
   try {
     const uniqueId = req.dataFromMiddleware1.id;
+    req.body.name = req.dataFromMiddleware1.displayName
     let calenderData = await calenderSchema.findOne({
       userid: uniqueId,
       date: req.body.date,

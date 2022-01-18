@@ -17,7 +17,7 @@ const userAuthenticationMiddleware = async (req, res, next) => {
     req.dataFromMiddleware1 = responseData.data;
     next();
   } catch (err) {
-    res.status(err.response.status).send({
+    res.status(401).send({
       message: " Invalid Access Token",
     });
   }

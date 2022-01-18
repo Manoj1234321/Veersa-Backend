@@ -5,14 +5,11 @@ const port = process.env.PORT || 1200;
 const swaggerUi = require("swagger-ui-express");
 const swaggerJsdoc = require("swagger-jsdoc");
 const basicAuth = require("express-basic-auth");
-const swaggerOptions1 = require('./swagger-one')
-console.log("THis is option 1", swaggerOptions1)
-const swaggerOptions2 = require('./swagger-two')
-console.log("THis is option 2", swaggerOptions2)
+const swaggerOptions1 = require("./swagger-one");
+const swaggerOptions2 = require("./swagger-two");
 
-
-const jsDoc1 = swaggerJsdoc(swaggerOptions1)
-const jsDoc2 = swaggerJsdoc(swaggerOptions2)
+const jsDoc1 = swaggerJsdoc(swaggerOptions1);
+const jsDoc2 = swaggerJsdoc(swaggerOptions2);
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
@@ -25,17 +22,23 @@ app.use(
 require("./database/db");
 const calenderRoute = require("./routes/calenderRoutes/calender");
 const meRoute = require("./routes/meRoutes/me");
+const superAdmin = require('./routes/superAdmin/isSuperAdmin')
 app.use("/v1", meRoute);
 app.use("/v1", calenderRoute);
+app.use("/v1",superAdmin)
 
-var options = {}
-const useSchema = schema => (...args) => swaggerUi.setup(schema)(...args);
+var options = {};
 
-// app.use('/apple', swaggerUi.serve, useSchema(jsDoc1));
-// app.use('/apple', swaggerUi.serve, useSchema(jsDoc2));
-
-app.use("/api-doc1", swaggerUi.serveFiles(jsDoc1, options), swaggerUi.setup(jsDoc1));
-app.use("/api-doc2", swaggerUi.serveFiles(jsDoc2, options), swaggerUi.setup(jsDoc2));
+app.use(
+  "/api-doc1",
+  swaggerUi.serveFiles(jsDoc1, options),
+  swaggerUi.setup(jsDoc1)
+);
+app.use(
+  "/api-doc2",
+  swaggerUi.serveFiles(jsDoc2, options),
+  swaggerUi.setup(jsDoc2)
+);
 
 app
   .get("/", (req, res) => {

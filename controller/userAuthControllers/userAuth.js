@@ -17,23 +17,29 @@ let userAuth = async (req, res) => {
     if (req.dataFromMiddleware1.jobTitle == "Software Engineer") {
       req.dataFromMiddleware1["isAdmin"] = false;
       req.dataFromMiddleware1["isviewer"] = true;
+      req.dataFromMiddleware1["isSuperAdmin"] = true;
     }
-    if (req.dataFromMiddleware1.jobTitle == "isAdmin") {
-      req.dataFromMiddleware1["isAdmin"] = true;
-      req.dataFromMiddleware1["isviewer"] = true;
-    }
+    // if (req.dataFromMiddleware1.jobTitle == "isAdmin") {
+    //   req.dataFromMiddleware1["isAdmin"] = true;
+    //   req.dataFromMiddleware1["isviewer"] = true;
+    //   req.dataFromMiddleware1["isSuperAdmin"] = true;
+
+    // }
 
     res.send(req.dataFromMiddleware1);
   } catch (err) {
     if (err.response.status == 404) {
       req.dataFromMiddleware1["image"] = " ";
+      // if (req.dataFromMiddleware1.jobTitle == "Manager") {
+      //   req.dataFromMiddleware1["isSuperAdmin"] = false;
+      //   req.dataFromMiddleware1["isAdmin"] = true;
+      //   req.dataFromMiddleware1["isSuperAdmin"] = true;
+
+      // }
       if (req.dataFromMiddleware1.jobTitle == "Software Engineer") {
-        req.dataFromMiddleware1["isAdmin"] = false;
         req.dataFromMiddleware1["isviewer"] = true;
-      }
-      if (req.dataFromMiddleware1.jobTitle == "isAdmin") {
-        req.dataFromMiddleware1["isAdmin"] = true;
-        req.dataFromMiddleware1["isviewer"] = true;
+        req.dataFromMiddleware1["isSuperAdmin"] = true;
+
       }
       res.send(req.dataFromMiddleware1);
     }
