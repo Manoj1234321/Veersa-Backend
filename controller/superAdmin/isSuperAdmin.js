@@ -10,7 +10,7 @@ const superAdmin = async (req, res) => {
         if (err) {
           res.send(err);
         } else {
-          if (docs == null) {
+          if (docs.length === 0) {
             return res.send({
               data: [],
             });
