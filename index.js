@@ -7,9 +7,11 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const basicAuth = require("express-basic-auth");
 const swaggerOptions1 = require("./swagger-one");
 const swaggerOptions2 = require("./swagger-two");
+const swaggerOptions3 = require("./swagger-three");
 
 const jsDoc1 = swaggerJsdoc(swaggerOptions1);
 const jsDoc2 = swaggerJsdoc(swaggerOptions2);
+const jsDoc3 = swaggerJsdoc(swaggerOptions3);
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
@@ -22,10 +24,10 @@ app.use(
 require("./database/db");
 const calenderRoute = require("./routes/calenderRoutes/calender");
 const meRoute = require("./routes/meRoutes/me");
-const superAdmin = require('./routes/superAdmin/isSuperAdmin')
+const superAdmin = require("./routes/superAdmin/isSuperAdmin");
 app.use("/v1", meRoute);
 app.use("/v1", calenderRoute);
-app.use("/v1",superAdmin)
+app.use("/v1", superAdmin);
 
 var options = {};
 
@@ -38,6 +40,11 @@ app.use(
   "/api-doc2",
   swaggerUi.serveFiles(jsDoc2, options),
   swaggerUi.setup(jsDoc2)
+);
+app.use(
+  "/api-doc3",
+  swaggerUi.serveFiles(jsDoc3, options),
+  swaggerUi.setup(jsDoc3)
 );
 
 app

@@ -4,7 +4,6 @@ const middlewares = require("../../middleware/userAuthmiddleware");
 const calender = require("../../controller/calenderControllers/calender");
 const userNames = require("../../controller/calenderControllers/userNames");
 
-
 /**
  * @swagger
  *  components:
@@ -66,8 +65,6 @@ app.post("/calender", middlewares.userAuthenticationMiddleware, calender.store);
 
 /**
  * @swagger
- * tags: 
- *  name: Get User's data by Date
  * /v1/calender:
  *  get:
  *   parameters:
@@ -82,6 +79,25 @@ app.post("/calender", middlewares.userAuthenticationMiddleware, calender.store);
  *     description: error
  */
 app.get("/calender", middlewares.userAuthenticationMiddleware, calender.index);
-app.get("/allnames",middlewares.userAuthenticationMiddleware,userNames.usersNames)
+/**
+ * @swagger
+ * /v1/allnames:
+ *  get:
+ *   parameters:
+ *     - in: query
+ *       name: date
+ *   summary: Get User's name and UserId
+ *   description: Get User's name and UserId
+ *   responses:
+ *    200:
+ *     description: success
+ *    500:
+ *     description: error
+ */
+app.get(
+  "/allnames",
+  middlewares.userAuthenticationMiddleware,
+  userNames.usersNames
+);
 
 module.exports = app;
